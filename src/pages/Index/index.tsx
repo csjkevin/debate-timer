@@ -37,17 +37,12 @@ const Index: React.FC = () => {
         <IndexButton linkTo="/stage3">3.自由辩论</IndexButton>
         <IndexButton linkTo="/stage4">4.总结陈词</IndexButton>
       </div>
-      <div className={styles.footer}>
-        {canFullScreen ? (
-          <button
-            className={styles.fullScreenButton}
-            onClick={handleFullScreen}
-          >
-            {isFullScreen ? "退出全屏" : "全屏"}
-          </button>
-        ) : null}
-        <div className={styles.copyright}>&copy; 2021 浙江省苍南中学</div>
-      </div>
+      {canFullScreen ? (
+        <button className={styles.fullScreenButton} onClick={handleFullScreen}>
+          {isFullScreen ? "退出全屏" : "全屏"}
+        </button>
+      ) : null}
+      <div className={styles.copyright}>&copy; 2021 浙江省苍南中学</div>
     </>
   );
 };
