@@ -3,16 +3,16 @@
   margin-bottom: 1rem;
 }
 
-@media (min-width: 260px) and (min-height: 420px) {
-  .copyright {
-    font-size: 1.25rem;
-  }
-}
-
-@media (min-width: 480px) and (min-height: 320px) {
+@media (min-width: 480px) and (min-height: 360px) {
   .copyright {
     font-size: 1rem;
     margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 360px) and (min-height: 400px) {
+  .copyright {
+    font-size: 1.25rem;
   }
 }
 
