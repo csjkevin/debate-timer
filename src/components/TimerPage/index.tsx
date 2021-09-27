@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./index.module.css";
@@ -22,12 +22,18 @@ const SingleTimer: React.FC<Props> = (props) => {
     };
   }, [timer]);
 
-  const clearTimer = () => {
+  const clearTimer = useCallback(() => {
     if (timer) {
       clearInterval(timer);
       setTimer(null);
     }
-  };
+  }, [timer]);
+
+  useEffect(() => {
+    if (remainingTime <= 0) {
+      clearTimer();
+    }
+  }, [clearTimer, remainingTime]);
 
   const handleTimerControl = () => {
     if (timer) {
@@ -35,14 +41,7 @@ const SingleTimer: React.FC<Props> = (props) => {
     } else {
       setTimer(
         setInterval(() => {
-          setRemainingTime((prevState) => {
-            if (prevState > 0) {
-              return prevState - 1;
-            } else {
-              clearTimer();
-              return prevState;
-            }
-          });
+          setRemainingTime((prevState) => prevState - 1);
         }, 1000)
       );
     }
@@ -62,7 +61,7 @@ const SingleTimer: React.FC<Props> = (props) => {
       </div>
       <div className={styles.control}>
         <button onClick={handleTimerControl} disabled={!remainingTime}>
-          {timer ? "暂停" : "开始"}
+          {timer || remainingTime <= 0 ? "暂停" : "开始"}
         </button>
         <button onClick={handleTimerReset}>重置</button>
         <Link to="">
